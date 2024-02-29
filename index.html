@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="chujci.ico">    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="chujci.ico">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jump King PL</title>
-    <p id="info">site still in development</p>
+	<div id="info-box">
+    <p id="info">still in development</p>
     <p id="font"><a href="https://www.dafont.com/pixolde.font">Font Pixolde by jeti</a></p>
-    <style>
+    </div>
+	<style>
+		#info-box{
+			text-align: center;
+			max-width: 11.5%;
+			overflow: hidden;
+			font-size: 1;
+			}
         #info{
             color: white;
+			font-size: 1.5vw;
         }
+		#font{
+			font-size: 1.5vw;
+		}
         body {
             font-size: 20px;
             margin: 0;
             padding: 0;
-            background-image: url("jk.png");
+            background-image: url("jk2.png");
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
             background-color: black;
         }
         #speedrunData {
@@ -62,6 +75,12 @@
             text-align: left;
         }
         
+        /* Media Query for adjusting background attachment */
+        @media (min-width: 768px) {
+            body {
+                background-attachment: fixed; /* Fixed background only for larger screens */
+            }
+        }
     </style>
 </head>
 <body>
