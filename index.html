@@ -4,6 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speedrun Data</title>
+    <style>
+        body {
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        #speedrunData {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .run-entry {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            margin: 0;
+            color: #007bff;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .run-info {
+            margin-left: 20px;
+        }
+        @font-face {
+            font-family: myFirstFont;
+            src: url(Pixolde.ttf);
+        }
+        html {
+            font-family: myFirstFont;
+            color: rgb(0, 0, 0);
+        }
+    </style>
 </head>
 <body>
     <h1>Polusy w top100</h1>
@@ -28,71 +70,41 @@
                     const userResponse = await fetch(`https://www.speedrun.com/api/v1/users/${userId}`);
                     const userData = await userResponse.json();
 
-                    
                     var grajek = (userData.data.names.international)
 
                     try {
-                    var krajGrajka = (userData.data.location.country.names.international)
-                }catch(error){
-                    var krajGrajka = "jd";
-                }
-                    // console.log(krajGrajka)
+                        var krajGrajka = (userData.data.location.country.names.international)
+                    } catch(error){
+                        var krajGrajka = "jd";
+                    }
 
                     if (String(seconds).length==2){
                         sekundes = seconds
-                    }else{
-                            // console.log(String(seconds))
-                            sekundes = "0" + String(seconds);
-                        }
+                    } else {
+                        sekundes = "0" + String(seconds);
+                    }
                     
-                    
-            if (krajGrajka=="Poland"){
-                console.log("jd")
-                jd = jd + 1
-                const runDiv = document.createElement('div');
-                runDiv.setAttribute("id", "runDiv");
+                    if (krajGrajka=="Poland"){
+                        jd = jd + 1
+                        const runDiv = document.createElement('div');
+                        runDiv.setAttribute("class", "run-entry");
 
-                    runDiv.innerHTML = `
-                        <h3>Miejsce jako polus: ${jd}</h3>
-                        <p>Grajek: ${grajek}</p>
-                        <p>Czas: ${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <P>Kraj: ${krajGrajka}</p>
-                        <p>Miejsce na tabeli: ${i+1}</p>
+                        runDiv.innerHTML = `
+                            <h2>TOP ${jd} POLUS</h3>
+                            <p>${grajek}</p>
+                            <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
+                            <p>Miejsce na tabeli: ${i+1}</p>
+                        `;
 
-                    `;
-
-                   const speedrunDataContainer = document.getElementById('speedrunData');
-                    speedrunDataContainer.appendChild(runDiv);
-                ;
-            }
-        }
-
+                        const speedrunDataContainer = document.getElementById('speedrunData');
+                        speedrunDataContainer.appendChild(runDiv);
+                    }
+                }
             } catch (error) {
                 console.error('Error fetching speedrun data:', error);
             }
-        
         }
         fetchSpeedrunData();
     </script>
 </body>
 </html>
-
-
-<style>
-    #runDiv{
-        border: 1px solid lightblue;
-        margin-top: 5px;
-        width: 400px;
-    }
-    @font-face {
-    font-family: myFirstFont;
-    src: url(Pixolde.ttf);
-}
-html {
-    font-family: myFirstFont;
-    color: rgb(0, 0, 0);
-}
-p{
-    font-size: 20px;
-}
-</style>
