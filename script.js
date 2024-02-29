@@ -52,7 +52,7 @@ async function fetchSpeedrunData() {
                 runDiv.setAttribute("class", "run-entry");
 				
                 runDiv.innerHTML = `
-                    <h2>TOP ${jd} POLUS</h3>
+                    <h2 id="mjsc">TOP ${jd} POLUS</h2>
                     <p>${grajek}</p>
                     <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
                     <p>Miejsce na tabeli: ${i+1}</p>
