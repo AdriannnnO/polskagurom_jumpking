@@ -79,16 +79,18 @@
         background-color: black;
     }
     #speedrunData {
-        height: 200vh;
+        min-height: 150vh;
         max-width: 40vw;
         margin: 20px auto;
         padding: 20px;
-        background-color: #fff;
+        background-color: #ffffff;
         border-radius: 8px;
+        border: 5px solid #ff00dd;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .run-entry {
-        border-bottom: 1px solid #ccc;
+        color: rgb(0, 0, 0);
+        border-bottom: 1px solid #ff00dd;
         padding: 10px 0;
         max-height: 21vh;
     }
@@ -99,7 +101,7 @@
     h2 {
         font-size: 1.6em;
         margin: 0;
-        color: #007bff;
+        color: #ff00dd;
     }
     p {
         margin: 5px 0;
@@ -123,7 +125,7 @@
     }
     #mjsc{
         margin-top: 0;
-        color: rgb(47, 0, 255);
+        color: #ff00dd;
         text-align: left;
     }
     .topjeden{
@@ -133,10 +135,9 @@
     #jdd{
         margin-left: 5px;
     }
-    /* Media Query for adjusting background attachment */
     @media (min-width: 768px) {
         body {
-            background-attachment: fixed; /* Fixed background only for larger screens */
+            background-attachment: fixed; 
         }
     }
 </style>
