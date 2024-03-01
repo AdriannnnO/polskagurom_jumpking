@@ -1,4 +1,5 @@
 let jd = 0
+let koronka = "git.png"
 
 divy = document.querySelectorAll("div")
 console.log(divy.length)
@@ -36,6 +37,12 @@ async function fetchSpeedrunData() {
 			var grajek = (data.data.players.data[i].names.international)
 
             try {
+            var video = data.data.runs[i].run.videos.links[0].uri;
+            }catch (error){
+                var video="Null"
+            }
+
+            try {
                 var krajGrajka = (data.data.players.data[i].location.country.names.international)
             } catch(error){
                 var krajGrajka = "jd";
@@ -46,21 +53,40 @@ async function fetchSpeedrunData() {
             } else {
                 sekundes = "0" + String(seconds);
             }
-            if (krajGrajka=="Poland"){
+            if (krajGrajka == "Poland") {
                 jd = jd + 1
                 const runDiv = document.createElement('div');
                 runDiv.setAttribute("class", "run-entry");
-				
-                runDiv.innerHTML = `
-                    <h2 id="mjsc">TOP ${jd} POLUS</h2>
-                    <p>${grajek}</p>
-                    <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                    <p>Miejsce na tabeli: ${i+1}</p>
-                `;
-
+            
+                if (jd === 1) {
+                    const firstRunDiv = document.createElement('div');
+                    firstRunDiv.setAttribute("class", "first-run-entry");
+            
+                    firstRunDiv.innerHTML = `
+                    <div class="topjeden">
+                        <h2 id="mjsc">${jd}. ${grajek}</h2>
+                            <img id="jdd" src="${koronka}" width="24px" height="24px" alt="Image">
+                        </div>
+                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
+                        <p>Miejsce na tabeli: ${i + 1}</p>
+                        <p><a href="${video}" target="_blank">filmik</a></p>
+                    `;
+                    
+                    runDiv.appendChild(firstRunDiv);
+                } else {
+                    runDiv.innerHTML = `
+                        <h2 id="mjsc">${jd}. ${grajek}</h2>
+                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
+                        <p>Miejsce na tabeli: ${i + 1}</p>
+                        <p><a href="${video}" target="_blank">filmik</a></p>
+                    `;
+                }
+            
                 const speedrunDataContainer = document.getElementById('speedrunData');
                 speedrunDataContainer.appendChild(runDiv);
-		}}
+            }
+            
+		}
         hide_loadyn();
         
     } catch (error) {
