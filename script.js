@@ -1,5 +1,7 @@
 let jd = 0
 let koronka = "git.png"
+let koronka2 = "git2.png"
+let koronka3 = "git3.png"
 
 divy = document.querySelectorAll("div")
 console.log(divy.length)
@@ -65,7 +67,7 @@ async function fetchSpeedrunData() {
                     firstRunDiv.innerHTML = `
                     <div class="topjeden">
                         <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka}" width="24px" height="24px" alt="Image">
+                            <img id="jdd" src="${koronka}" width="20px" height="20px" alt="Image">
                         </div>
                         <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
                         <p>Miejsce na tabeli: ${i + 1}</p>
@@ -88,7 +90,8 @@ async function fetchSpeedrunData() {
             
 		}
         hide_loadyn();
-        
+        document.body.style.backgroundImage = "url('jk2.png')";
+
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
@@ -142,7 +145,7 @@ async function fetchSpeedrunData_NewBabePlus() {
                     firstRunDiv.innerHTML = `
                     <div class="topjeden">
                         <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka}" width="24px" height="24px" alt="Image">
+                            <img id="jdd" src="${koronka2}" width="32px" height="32px" alt="Image">
                         </div>
                         <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
                         <p>Miejsce na tabeli: ${i + 1}</p>
@@ -165,7 +168,7 @@ async function fetchSpeedrunData_NewBabePlus() {
             
 		}
         hide_loadyn();
-        
+        document.body.style.backgroundImage = "url('jk3.png')";
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
@@ -221,7 +224,7 @@ async function fetchSpeedrunData_gotb() {
                     firstRunDiv.innerHTML = `
                     <div class="topjeden">
                         <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka}" width="24px" height="24px" alt="Image">
+                            <img id="jdd" src="${koronka3}" width="32px" height="32px" alt="Image">
                         </div>
                         <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
                         <p>Miejsce na tabeli: ${i + 1}</p>
@@ -244,7 +247,7 @@ async function fetchSpeedrunData_gotb() {
             
 		}
         hide_loadyn();
-        
+        document.body.style.backgroundImage = "url('jk4.png')";
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }

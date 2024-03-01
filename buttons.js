@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const buttons = document.querySelectorAll('button');
 
+    // Highlight the first button by default
     buttons[0].classList.add('highlight');
 
     buttons.forEach(button => {
