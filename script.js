@@ -21,7 +21,7 @@ function hide_loadyn(){
 
 async function fetchSpeedrunData() {
     try {
-
+        document.body.style.backgroundImage = "url('jk2.png')";
         loadyn();
         let jd= 0
         const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/n2y7rvz2?embed=players');
@@ -90,7 +90,7 @@ async function fetchSpeedrunData() {
             
 		}
         hide_loadyn();
-        document.body.style.backgroundImage = "url('jk2.png')";
+        // document.body.style.backgroundImage = "url('jk2.png')";
 
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
@@ -99,7 +99,7 @@ async function fetchSpeedrunData() {
 fetchSpeedrunData();
 async function fetchSpeedrunData_NewBabePlus() {
     try {
-
+        document.body.style.backgroundImage = "url('jk3.png')";
         loadyn();
         let jd=0
         const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/9d8x83q2?embed=players');
@@ -168,7 +168,7 @@ async function fetchSpeedrunData_NewBabePlus() {
             
 		}
         hide_loadyn();
-        document.body.style.backgroundImage = "url('jk3.png')";
+        // document.body.style.backgroundImage = "url('jk3.png')";
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
@@ -178,7 +178,7 @@ async function fetchSpeedrunData_NewBabePlus() {
 
 async function fetchSpeedrunData_gotb() {
     try {
-
+        document.body.style.backgroundImage = "url('jk4.png')";
         loadyn();
         let jd= 0
         const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/mke9q6jd?embed=players');
@@ -247,7 +247,7 @@ async function fetchSpeedrunData_gotb() {
             
 		}
         hide_loadyn();
-        document.body.style.backgroundImage = "url('jk4.png')";
+        // document.body.style.backgroundImage = "url('jk4.png')";
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
