@@ -59,7 +59,7 @@ margin: 20px auto;
 padding: 0px;
 background-color: #ffffff;
 border-radius: 8px;
-border: 5px solid #ff00dd;
+border: 5px double rgb(0, 0, 0);
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .run-entry {
