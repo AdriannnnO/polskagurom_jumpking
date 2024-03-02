@@ -19,15 +19,30 @@ function hide_loadyn(){
     }
 }
 
-async function fetchSpeedrunData() {
+function zrob_tabele_whuj(){
+    const table = document.createElement('table');
+    table.setAttribute('id', 'speedrunTable');
+    table.innerHTML = `
+        <tr>
+            <th>Miejsce</th>
+            <th>Grajek</th>
+            <th>Czas</th>
+            <th>Filmik</th>
+            <th>Top</th>
+        </tr>
+    `;
+    return table
+}
+
+
+async function collectData(apiUrl) {
+    let jd = 1
     try {
-        document.body.style.backgroundImage = "url('jk2.png')";
-        loadyn();
-        let jd= 0
-        const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/n2y7rvz2?embed=players');
+        const response = await fetch(apiUrl);
         const data = await response.json();
-        
-        for (i=0; i < data.data.runs.length; i++){
+        const collectedData = [];
+
+        for (let i = 0; i < data.data.runs.length; i++) {
             const decimalTime = data.data.runs[i].run.times.realtime_t;
             const userId = data.data.runs[i].run.players[0].id;
 
@@ -36,139 +51,106 @@ async function fetchSpeedrunData() {
             var seconds = totalSeconds % 60;
             var milliseconds = Math.round((decimalTime - totalSeconds) * 1000);
 
-			var grajek = (data.data.players.data[i].names.international)
+            var grajek = (data.data.players.data[i].names.international);
 
             try {
-            var video = data.data.runs[i].run.videos.links[0].uri;
-            }catch (error){
-                var video="Null"
+                var video = data.data.runs[i].run.videos.links[0].uri;
+            } catch (error) {
+                var video = "Null";
             }
 
             try {
-                var krajGrajka = (data.data.players.data[i].location.country.names.international)
-            } catch(error){
+                var krajGrajka = (data.data.players.data[i].location.country.names.international);
+            } catch(error) {
                 var krajGrajka = "jd";
             }
-			
-            if (String(seconds).length==2){
-                sekundes = seconds
+
+            if (String(seconds).length == 2) {
+                sekundes = seconds;
             } else {
                 sekundes = "0" + String(seconds);
             }
-            if (krajGrajka == "Poland") {
-                jd = jd + 1
-                const runDiv = document.createElement('div');
-                runDiv.setAttribute("class", "run-entry");
-            
-                if (jd === 1) {
-                    const firstRunDiv = document.createElement('div');
-                    firstRunDiv.setAttribute("class", "first-run-entry");
-            
-                    firstRunDiv.innerHTML = `
-                    <div class="topjeden">
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka}" width="20px" height="20px" alt="Image">
-                        </div>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                    
-                    runDiv.appendChild(firstRunDiv);
-                } else {
-                    runDiv.innerHTML = `
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                }
-            
-                const speedrunDataContainer = document.getElementById('speedrunData');
-                speedrunDataContainer.appendChild(runDiv);
-            }
-            
-		}
-        hide_loadyn();
-        // document.body.style.backgroundImage = "url('jk2.png')";
 
+            if (krajGrajka == "Poland") {
+                const formattedData = {
+                    place: jd++,
+                    player: grajek,
+                    time: `${minutes}m ${sekundes}s ${milliseconds}ms`,
+                    videoLink: video,
+                    top: i + 1
+                };
+                collectedData.push(formattedData);
+            }
+        }
+        return collectedData;
+    } catch (error) {
+        console.error('Error collecting data:', error);
+        return [];
+    }
+}
+
+
+async function fetchSpeedrunData() {
+    try {
+        document.body.style.backgroundImage = "url('jk2.png')";
+        loadyn();
+        
+        const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/n2y7rvz2?embed=players';
+        const collectedData = await collectData(apiUrl);
+
+        const table = zrob_tabele_whuj();
+
+        collectedData.forEach((rowData, index) => {
+            const { place, player, time, videoLink, top } = rowData;
+            const row = table.insertRow(-1);
+            row.innerHTML = `
+                <td>${place}</td>
+                <td>${player}</td>
+                <td>${time}</td>
+                <td><a href="${videoLink}" target="_blank">link</a></td>
+                <td>${top}</td>
+            `;
+        });
+
+        const speedrunDataContainer = document.getElementById('speedrunData');
+        speedrunDataContainer.innerHTML = '';
+        speedrunDataContainer.appendChild(table);
+        hide_loadyn();
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
 }
+
+
 fetchSpeedrunData();
 async function fetchSpeedrunData_NewBabePlus() {
     try {
         document.body.style.backgroundImage = "url('jk3.png')";
         loadyn();
-        let jd=0
-        const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/9d8x83q2?embed=players');
-        const data = await response.json();
         
-        for (i=0; i < data.data.runs.length; i++){
-            const decimalTime = data.data.runs[i].run.times.realtime_t;
-            const userId = data.data.runs[i].run.players[0].id;
+        const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/9d8x83q2?embed=players';
+        const collectedData = await collectData(apiUrl);
 
-            var totalSeconds = Math.floor(decimalTime);
-            var minutes = Math.floor(totalSeconds / 60);
-            var seconds = totalSeconds % 60;
-            var milliseconds = Math.round((decimalTime - totalSeconds) * 1000);
+        const table = zrob_tabele_whuj();
 
-			var grajek = (data.data.players.data[i].names.international)
+        collectedData.forEach((rowData, index) => {
+            const { place, player, time, videoLink, top } = rowData;
+            const row = table.insertRow(-1);
+            row.innerHTML = `
+                <td>${place}</td>
+                <td>${player}</td>
+                <td>${time}</td>
+                <td><a href="${videoLink}" target="_blank">link</a></td>
+                <td>${top}</td>
+            `;
+        });
 
-            try {
-            var video = data.data.runs[i].run.videos.links[0].uri;
-            }catch (error){
-                var video="Null"
-            }
-
-            try {
-                var krajGrajka = (data.data.players.data[i].location.country.names.international)
-            } catch(error){
-                var krajGrajka = "jd";
-            }
-			
-            if (String(seconds).length==2){
-                sekundes = seconds
-            } else {
-                sekundes = "0" + String(seconds);
-            }
-            if (krajGrajka == "Poland") {
-                jd = jd + 1
-                const runDiv = document.createElement('div');
-                runDiv.setAttribute("class", "run-entry");
-            
-                if (jd === 1) {
-                    const firstRunDiv = document.createElement('div');
-                    firstRunDiv.setAttribute("class", "first-run-entry");
-            
-                    firstRunDiv.innerHTML = `
-                    <div class="topjeden">
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka2}" width="32px" height="32px" alt="Image">
-                        </div>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                    
-                    runDiv.appendChild(firstRunDiv);
-                } else {
-                    runDiv.innerHTML = `
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                }
-            
-                const speedrunDataContainer = document.getElementById('speedrunData');
-                speedrunDataContainer.appendChild(runDiv);
-            }
-            
-		}
+        const speedrunDataContainer = document.getElementById('speedrunData');
+        speedrunDataContainer.innerHTML = '';
+        speedrunDataContainer.appendChild(table);
         hide_loadyn();
-        // document.body.style.backgroundImage = "url('jk3.png')";
+        speedrunDataContainer.style.minHeight="40vh";
+        
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }
@@ -180,74 +162,28 @@ async function fetchSpeedrunData_gotb() {
     try {
         document.body.style.backgroundImage = "url('jk4.png')";
         loadyn();
-        let jd= 0
-        const response = await fetch('https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/mke9q6jd?embed=players');
-        const data = await response.json();
         
-        for (i=0; i < data.data.runs.length; i++){
-            const decimalTime = data.data.runs[i].run.times.realtime_t;
-            const userId = data.data.runs[i].run.players[0].id;
+        const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/mke9q6jd?embed=players';
+        const collectedData = await collectData(apiUrl);
 
-            var totalSeconds = Math.floor(decimalTime);
-            var minutes = Math.floor(totalSeconds / 60);
-            var seconds = totalSeconds % 60;
-            var milliseconds = Math.round((decimalTime - totalSeconds) * 1000);
+        const table = zrob_tabele_whuj();
 
-			var grajek = (data.data.players.data[i].names.international)
+        collectedData.forEach((rowData, index) => {
+            const { place, player, time, videoLink, top } = rowData;
+            const row = table.insertRow(-1);
+            row.innerHTML = `
+                <td>${place}</td>
+                <td>${player}</td>
+                <td>${time}</td>
+                <td><a href="${videoLink}" target="_blank">link</a></td>
+                <td>${top}</td>
+            `;
+        });
 
-            try {
-            var video = data.data.runs[i].run.videos.links[0].uri;
-            }catch (error){
-                var video="Null"
-            }
-
-            try {
-                var krajGrajka = (data.data.players.data[i].location.country.names.international)
-            } catch(error){
-                var krajGrajka = "jd";
-            }
-			
-            if (String(seconds).length==2){
-                sekundes = seconds
-            } else {
-                sekundes = "0" + String(seconds);
-            }
-            if (krajGrajka == "Poland") {
-                jd = jd + 1
-                const runDiv = document.createElement('div');
-                runDiv.setAttribute("class", "run-entry");
-            
-                if (jd === 1) {
-                    const firstRunDiv = document.createElement('div');
-                    firstRunDiv.setAttribute("class", "first-run-entry");
-            
-                    firstRunDiv.innerHTML = `
-                    <div class="topjeden">
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                            <img id="jdd" src="${koronka3}" width="32px" height="32px" alt="Image">
-                        </div>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                    
-                    runDiv.appendChild(firstRunDiv);
-                } else {
-                    runDiv.innerHTML = `
-                        <h2 id="mjsc">${jd}. ${grajek}</h2>
-                        <p>${minutes}m ${sekundes}s ${milliseconds}ms</p>
-                        <p>Miejsce na tabeli: ${i + 1}</p>
-                        <p><a href="${video}" target="_blank">filmik</a></p>
-                    `;
-                }
-            
-                const speedrunDataContainer = document.getElementById('speedrunData');
-                speedrunDataContainer.appendChild(runDiv);
-            }
-            
-		}
+        const speedrunDataContainer = document.getElementById('speedrunData');
+        speedrunDataContainer.innerHTML = '';
+        speedrunDataContainer.appendChild(table);
         hide_loadyn();
-        // document.body.style.backgroundImage = "url('jk4.png')";
     } catch (error) {
         console.error('Error fetching speedrun data:', error);
     }

@@ -1,0 +1,156 @@
+.highlight {
+    background-color: rgb(255, 0, 183);
+}
+button {
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+cursor: pointer;
+border: 2px solid #ffffff;
+border-radius: 5px;
+background-color: #87a5d7;
+color: #fff;
+transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+#buttony{
+max-width: 40vw;
+margin: 0 auto;
+display: flex;
+align-items: center;
+flex-direction: row;
+max-height: 7vh;
+}
+#bb,#nbb,#gotb{
+text-align: center;
+margin: 0 auto;
+display: block;
+}
+#info-box{
+text-align: center;
+max-width: 11.5%;
+overflow: hidden;
+font-size: 1;
+}
+#info{
+color: white;
+font-size: 1.5vw;
+}
+#font{
+font-size: 1.5vw;
+}
+body {
+overflow-y: scroll;
+font-size: 20px;
+margin: 0;
+padding: 0;
+background-image: url("jk2.png");
+background-repeat: no-repeat;
+background-size: cover; 
+background-position: center; 
+background-color: black;
+}
+#speedrunData {
+min-height: 5vh;
+max-width: 40vw;
+margin: 20px auto;
+padding: 0px;
+background-color: #ffffff;
+border-radius: 8px;
+border: 5px solid #ff00dd;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.run-entry {
+color: rgb(0, 0, 0);
+border-bottom: 1px solid #ff00dd;
+padding: 10px 0;
+max-height: 21vh;
+}
+h1 {
+text-align: center;
+color: #ffffff;
+}
+h2 {
+font-size: 1.6em;
+margin: 0;
+color: #ff00dd;
+}
+p {
+margin: 5px 0;
+font-size: 1.3em;
+
+}
+a{
+text-decoration: none;
+
+}
+.run-info {
+margin-left: 20px;
+}
+@font-face {
+font-family: myFirstFont;
+src: url(Pixolde.ttf);
+}
+html {
+font-family: myFirstFont;
+color: rgb(0, 0, 0);
+}
+#mjsc{
+margin-top: 0;
+color: #ff00dd;
+text-align: left;
+}
+.topjeden{
+display: flex;
+align-items: center;
+}
+#jdd{
+margin-left: 5px;
+}
+@media (min-width: 768px) {
+body {
+    background-attachment: fixed; 
+}
+}
+#speedrunTable {
+width: 100%;
+border-collapse: collapse;
+margin-bottom: 0; 
+}
+
+#speedrunTable th, #speedrunTable td {
+padding: 8px;
+text-align: left;
+}
+
+#speedrunTable th {
+background-color: #87a5d7;
+color: #fff;
+}
+#speedrunTable th,
+#speedrunTable td {
+border-bottom: 1px solid black; 
+}
+
+#speedrunTable th:first-child,
+#speedrunTable td:first-child {
+border-right: 1px solid black; 
+border-bottom: 1px solid black; 
+}
+
+#speedrunTable th:last-child,
+#speedrunTable td:last-child {
+border-left: 1px solid black; 
+border-bottom: 1px solid black; 
+}
+#speedrunTable th:not(:first-child):not(:last-child),
+#speedrunTable td:not(:first-child):not(:last-child) {
+border-right: 1px solid black; 
+border-bottom: 1px solid black; 
+}
+
+#speedrunTable td:nth-child(2) {
+    width: 15vw; 
+}
