@@ -53,6 +53,7 @@ background-position: center;
 background-color: black;
 }
 #speedrunData {
+    display: table;
 min-height: 5vh;
 max-width: 40vw;
 margin: 20px auto;
@@ -116,6 +117,7 @@ body {
 }
 #speedrunTable {
 width: 100%;
+/* table-layout: fixed; */
 border-collapse: collapse;
 margin-bottom: 0; 
 }
