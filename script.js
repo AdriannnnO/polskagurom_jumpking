@@ -1,11 +1,34 @@
 let jd = 0
-let koronka = "git.png"
-let koronka2 = "git2.png"
-let koronka3 = "git3.png"
+let koronka = "assets/git.png"
+let koronka2 = "assets/git2.png"
+let koronka3 = "assets/git3.png"
 
 divy = document.querySelectorAll("div")
 // console.log(divy.length)
 
+async function getLatestBestTimes(playerId,kategoria) {
+    const url = `https://www.speedrun.com/api/v1/runs?user=${playerId}&game=268ekxy6&category=${kategoria}&orderby=date&status=verified`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const runs = data.data.map(run => ({
+            time: run.times.primary_t,
+            date: run.date,
+        }));
+
+        const sortedRuns = runs.sort((a, b) => a.time - b.time);
+        return sortedRuns.slice(0, 5);
+    } catch (error) {
+        console.error("Error fetching or processing data:", error);
+        return [];
+    }
+}
 
 function loadyn(){
     let costampierdoli= document.getElementById("speedrunData");
@@ -135,13 +158,20 @@ async function collectData(apiUrl) {
             } else {
                 sekundes = "0" + String(seconds);
             }
-
+            if (String(milliseconds).length == 3) {
+                milisekundes = milliseconds;
+            } else if ((String(milliseconds).length == 2)) {
+                milisekundes = "0" + String(milliseconds);
+            }else if ((String(milliseconds).length == 1)) {
+                milisekundes = "00" + String(milliseconds);
+            }
             if (krajGrajka == "Poland") {
 
                 const formattedData = {
+                    userid: userId,
                     place: jd++,
                     player: grajek,
-                    time: `${minutes}m ${sekundes}s ${milliseconds}ms`,
+                    time: `${minutes}m ${sekundes}s ${milisekundes}ms`,
                     wind: real_cykl,
                     videoLink: video,
                     top: i + 1
@@ -159,7 +189,7 @@ async function collectData(apiUrl) {
 
 async function fetchSpeedrunData() {
     try {
-        document.body.style.backgroundImage = "url('jk2.png')";
+        document.body.style.backgroundImage = "url('assets/jk2.png')";
         loadyn();
         
         const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/n2y7rvz2?embed=players,variables';
@@ -169,7 +199,13 @@ async function fetchSpeedrunData() {
 
         collectedData.forEach((rowData, index) => {
             const { place, player, time, wind, videoLink, top } = rowData;
+        
+            const playerId = rowData.userid || "defaultId";
+        
             const row = table.insertRow(-1);
+            row.setAttribute('data-player-id', playerId); 
+            row.setAttribute('kategoria', 'n2y7rvz2'); 
+
             row.innerHTML = `
                 <td>${place}</td>
                 <td>${player}</td>
@@ -179,6 +215,7 @@ async function fetchSpeedrunData() {
                 <td>${top}</td>
             `;
         });
+        
 
         const speedrunDataContainer = document.getElementById('speedrunData');
         speedrunDataContainer.innerHTML = '';
@@ -190,10 +227,9 @@ async function fetchSpeedrunData() {
 }
 
 
-fetchSpeedrunData();
 async function fetchSpeedrunData_NewBabePlus() {
     try {
-        document.body.style.backgroundImage = "url('jk3.png')";
+        document.body.style.backgroundImage = "url('assets/jk3.png')";
         loadyn();
         
         const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/9d8x83q2?embed=players,variables';
@@ -204,6 +240,11 @@ async function fetchSpeedrunData_NewBabePlus() {
         collectedData.forEach((rowData, index) => {
             const { place, player, time, wind, videoLink, top } = rowData;
             const row = table.insertRow(-1);
+
+            const playerId = rowData.userid || "defaultId";
+        
+            row.setAttribute('data-player-id', playerId); 
+            row.setAttribute('kategoria', '9d8x83q2'); 
             row.innerHTML = `
                 <td>${place}</td>
                 <td>${player}</td>
@@ -225,11 +266,34 @@ async function fetchSpeedrunData_NewBabePlus() {
     }
 }
 
+function formatTime(seconds) {
+    const totalSeconds = Math.floor(seconds);
+    const minutes = Math.floor(totalSeconds / 60);
+    const remainingSeconds = totalSeconds % 60;
+    const milliseconds = Math.round((seconds - totalSeconds) * 1000);
+
+
+    if (String(remainingSeconds).length == 2) {
+        sekundes = remainingSeconds;
+    } else {
+        sekundes = "0" + String(remainingSeconds);
+    }
+
+    if (String(milliseconds).length == 3) {
+        milisekundes = milliseconds;
+    } else if ((String(milliseconds).length == 2)) {
+        milisekundes = "0" + String(milliseconds);
+    }else if ((String(milliseconds).length == 1)) {
+        milisekundes = "00" + String(milliseconds);
+    }
+
+    return `${minutes}m ${sekundes}s ${milisekundes}ms`;
+}
 
 
 async function fetchSpeedrunData_gotb() {
     try {
-        document.body.style.backgroundImage = "url('jk4.png')";
+        document.body.style.backgroundImage = "url('assets/jk4.png')";
         loadyn();
         
         const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/mke9q6jd?embed=players';
@@ -240,6 +304,10 @@ async function fetchSpeedrunData_gotb() {
         collectedData.forEach((rowData, index) => {
             const { place, player, time, videoLink, top } = rowData;
             const row = table.insertRow(-1);
+            const playerId = rowData.userid || "defaultId";
+        
+            row.setAttribute('data-player-id', playerId); 
+            row.setAttribute('kategoria', 'mke9q6jd'); 
             row.innerHTML = `
                 <td>${place}</td>
                 <td>${player}</td>
@@ -257,3 +325,70 @@ async function fetchSpeedrunData_gotb() {
         console.error('Error fetching speedrun data:', error);
     }
 }
+function showBestTimesModal(bestTimes) {
+    let modal = document.getElementById('bestTimesModal');
+    if (modal) {
+        document.body.removeChild(modal);
+    }
+
+    modal = document.createElement('div');
+    modal.setAttribute('id', 'bestTimesModal');
+    modal.style.position = 'fixed';
+    modal.style.top = '50%';
+    modal.style.left = '50%';
+    modal.style.transform = 'translate(-50%, -50%)';
+    modal.style.backgroundColor = 'white';
+    modal.style.padding = '20px';
+    modal.style.border = '3px solid red';
+    modal.style.zIndex = '1000';
+
+    const content = `
+        <h2>Ostatnie PB</h2>
+        <ul>
+            ${bestTimes.map(run => `<li>${run.date}: ${formatTime(run.time)}</li>`).join('')}
+        </ul>
+        <button id="closeModal">Zamknij</button>
+    `;
+    modal.innerHTML = content;
+    document.body.appendChild(modal);
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+}
+
+
+async function addRowEventListeners() {
+    const rows = document.querySelectorAll('#speedrunTable tr');
+    rows.forEach(row => {
+        row.addEventListener('click', async () => {
+            const ajdi = row.getAttribute('data-player-id'); // Get player ID
+            const kategorson = row.getAttribute('kategoria')
+            if (ajdi) {
+                const bestTimes = await getLatestBestTimes(ajdi,kategorson); // Fletch best times
+                showBestTimesModal(bestTimes); // Show moda with the times
+            }
+        });
+    });
+}
+
+
+async function fetchSpeedrunDataWithEvents() {
+    await fetchSpeedrunData(); 
+    addRowEventListeners();    
+}
+
+async function fetchSpeedrunData_NewBabePlusa(){
+    await fetchSpeedrunData_NewBabePlus();
+    addRowEventListeners();    
+
+}
+
+async function fetchSpeedrunData_gotba(){
+    await fetchSpeedrunData_gotb();
+    addRowEventListeners();    
+
+}
+
+
+fetchSpeedrunDataWithEvents()
