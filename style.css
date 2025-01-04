@@ -1,205 +1,214 @@
+/* CSS MADE ENTIRELY IN 98% BY AI FUCK THIS SHIT */
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(assets/Pixolde.ttf);
+    }
+html{
+    font-family: myFirstFont;
+}
+body {
+    margin: 0;
+    background-color: #1d1f21;
+    color: #9b05ff;
+    text-align: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* General Links */
+a {
+    color: #bc8add;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Info Box */
+#info-box {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+#info-box p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Main Title */
+h1 {
+    margin-top: 50px;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    font-family: myFirstFont;
+}
+
+/* Buttons Section */
+#buttony {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#buttony button {
+    background-color: #292b2f;
+    color: #f1f1f1;
+    border: 2px solid #f39c12;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#buttony button:hover {
+    background-color: rgb(173, 132, 226);
+    color: #292b2f;
+}
+
+#buttony button.highlight {
+    background-color: #9b05ff;
+    color: #292b2f;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
+}
+
+/* Speedrun Data Table */
+#speedrunData {
+    margin: 30px auto;
+    max-width: 90%;
+    overflow-x: auto;
+}
+
+/* General Table Styling */
+#speedrunTable {
+    width: 60%; /* Adjusted width to fit smaller screens */
+    margin: 20px auto; /* Center the table */
+    border-collapse: collapse;
+    background-color: #f8f8f8; /* Uniform background */
+    border: 2px solid #ddd; /* Outer border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Table Headers */
+#speedrunTable th {
+    background-color: #221e1e; /* Bold header background */
+    color: white; /* White text for contrast */
+    padding: 12px; /* Space inside cells */
+    font-size: 1.7rem; /* Larger font for headers */
+    text-align: center;
+    border: 1px solid #ccc; /* Dividing line between headers */
+}
+
+/* Table Rows */
+#speedrunTable td {
+    padding: 10px; /* Space inside cells */
+    font-size: 1.4rem; /* Comfortable reading size */
+    text-align: center; /* Center-align text */
+    border: 1px solid #ddd; /* Subtle cell borders */
+}
+
+/* Alternating Row Colors */
+#speedrunTable tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Slightly darker for odd rows */
+}
+
+#speedrunTable tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Hover Effect */
+#speedrunTable tr:hover {
+    background-color: #ffe4b5; /* Highlight on hover */
+    cursor: pointer; /* Pointer to indicate interactivity */
+}
+
+/* Highlighted Row Styling */
+#speedrunTable tr.highlighted {
+    background-color: #ffcccb; /* Soft red for selected row */
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+    #speedrunTable {
+        width: 100%; /* Full width for smaller devices */
+        font-size: 0.9rem; /* Slightly smaller font */
+    }
+    #speedrunTable th, #speedrunTable td {
+        padding: 8px; /* Reduced padding for compact view */
+    }
+}
 
 #bestTimesModal {
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1d1f21;
+    color: #ffffff;
+    padding: 20px;
+    border: 2px solid #9b05ff;
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 0 20px rgba(155, 5, 255, 0.8);
+    z-index: 1000;
+    max-width: 80%;
+    text-align: center;
 }
 
 #bestTimesModal h2 {
-    margin-top: 0;
-    font-size: 18px;
-    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #9b05ff;
 }
 
 #bestTimesModal ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    margin: 0;
-    text-align: left;
+    margin: 0 0 15px 0;
 }
 
 #bestTimesModal ul li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    font-size: 1.5rem;
+    margin: 8px 0;
+    color: #bc8add;
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2);
 }
 
-#bestTimesModal ul li:last-child {
-    border-bottom: none;
+#bestTimesModal button {
+    background-color: #292b2f;
+    color: #f1f1f1;
+    border: 2px solid #f39c12;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-#closeModal {
-    margin-top: 10px;
-    display: block;
+#bestTimesModal button:hover {
+    background-color: #9b05ff;
+    color: #292b2f;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
+}
+
+/* Modal Overlay */
+#modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background: #ff4444;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: center;
-    border-radius: 4px;
-}
-.highlight {
-    background-color: rgb(255, 0, 183);
-}
-button {
-display: inline-block;
-padding: 10px 20px;
-font-size: 16px;
-font-weight: bold;
-text-align: center;
-text-decoration: none;
-cursor: pointer;
-border: 2px solid #ffffff;
-border-radius: 5px;
-background-color: #87a5d7;
-color: #fff;
-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-#buttony{
-max-width: 40vw;
-margin: 0 auto;
-display: flex;
-align-items: center;
-flex-direction: row;
-max-height: 7vh;
-}
-#bb,#nbb,#gotb{
-text-align: center;
-margin: 0 auto;
-display: block;
-}
-#info-box{
-text-align: center;
-max-width: 11.5%;
-overflow: hidden;
-font-size: 1;
-}
-#info{
-color: white;
-font-size: 1.5vw;
-}
-#font{
-font-size: 1.5vw;
-}
-body {
-overflow-y: scroll;
-font-size: 20px;
-margin: 0;
-padding: 0;
-background-image: url("jk2.png");
-background-repeat: no-repeat;
-background-size: cover; 
-background-position: center; 
-background-color: black;
-}
-#speedrunData {
-    display: table;
-min-height: 5vh;
-max-width: 40vw;
-margin: 20px auto;
-padding: 0px;
-background-color: #ffffff;
-border-radius: 8px;
-border: 5px double rgb(0, 0, 0);
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.run-entry {
-color: rgb(0, 0, 0);
-border-bottom: 1px solid #ff00dd;
-padding: 10px 0;
-max-height: 21vh;
-}
-h1 {
-text-align: center;
-color: #ffffff;
-}
-h2 {
-font-size: 1.6em;
-margin: 0;
-color: #ff00dd;
-}
-p {
-margin: 5px 0;
-font-size: 1.3em;
-
-}
-a{
-text-decoration: none;
-
-}
-.run-info {
-margin-left: 20px;
-}
-@font-face {
-font-family: myFirstFont;
-src: url(assets/Pixolde.ttf);
-}
-html {
-font-family: myFirstFont;
-color: rgb(0, 0, 0);
-}
-#mjsc{
-margin-top: 0;
-color: #ff00dd;
-text-align: left;
-}
-.topjeden{
-display: flex;
-align-items: center;
-}
-#jdd{
-margin-left: 5px;
-}
-@media (min-width: 768px) {
-body {
-    background-attachment: fixed; 
-}
-}
-#speedrunTable td:hover{
-    cursor: pointer;
-}
-#speedrunTable {
-width: 100%;
-/* table-layout: fixed; */
-border-collapse: collapse;
-margin-bottom: 0; 
-}
-
-#speedrunTable th, #speedrunTable td {
-padding: 8px;
-text-align: left;
-}
-
-#speedrunTable th {
-background-color: #87a5d7;
-color: #fff;
-}
-#speedrunTable th,
-#speedrunTable td {
-border-bottom: 1px solid black; 
-}
-
-#speedrunTable th:first-child,
-#speedrunTable td:first-child {
-border-right: 1px solid black; 
-border-bottom: 1px solid black; 
-}
-
-#speedrunTable th:last-child,
-#speedrunTable td:last-child {
-border-left: 1px solid black; 
-border-bottom: 1px solid black; 
-}
-#speedrunTable th:not(:first-child):not(:last-child),
-#speedrunTable td:not(:first-child):not(:last-child) {
-border-right: 1px solid black; 
-border-bottom: 1px solid black; 
-}
-
-#speedrunTable td:nth-child(2) {
-    width: 15vw; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
 }
