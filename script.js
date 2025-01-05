@@ -189,7 +189,9 @@ async function collectData(apiUrl) {
 
 async function fetchSpeedrunData() {
     try {
-        document.body.style.backgroundImage = "url('assets/jk2.png')";
+        document.body.style.backgroundImage = "url('assets/jk3.png')";
+        // document.body.style.backgroundColor = "black";
+
         loadyn();
         
         const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/n2y7rvz2?embed=players,variables';
@@ -293,7 +295,8 @@ function formatTime(seconds) {
 
 async function fetchSpeedrunData_gotb() {
     try {
-        document.body.style.backgroundImage = "url('assets/jk4.png')";
+        document.body.style.backgroundImage = "url('assets/jk3.png')";
+        // document.body.style.backgroundColor = "black";
         loadyn();
         
         const apiUrl = 'https://www.speedrun.com/api/v1/leaderboards/268ekxy6/category/mke9q6jd?embed=players';
@@ -333,14 +336,14 @@ function showBestTimesModal(bestTimes) {
 
     modal = document.createElement('div');
     modal.setAttribute('id', 'bestTimesModal');
-    modal.style.position = 'fixed';
-    modal.style.top = '50%';
-    modal.style.left = '50%';
-    modal.style.transform = 'translate(-50%, -50%)';
-    modal.style.backgroundColor = 'white';
-    modal.style.padding = '20px';
-    modal.style.border = '3px solid red';
-    modal.style.zIndex = '1000';
+    // modal.style.position = 'fixed';
+    // modal.style.top = '50%';
+    // modal.style.left = '50%';
+    // modal.style.transform = 'translate(-50%, -50%)';
+    // modal.style.backgroundColor = 'white';
+    // modal.style.padding = '20px';
+    // modal.style.border = '3px solid red';
+    // modal.style.zIndex = '1000';
 
     const content = `
         <h2>Ostatnie PB</h2>
