@@ -185,7 +185,8 @@ h1 {
 
 #speedrunTable tr:hover td {
     background-color: rgba(155, 5, 255, 0.1);
-    transform: scale(1.01);
+    transform: scale(1.11);
+    cursor: pointer;
 }
 
 /* Enhanced Modal */
